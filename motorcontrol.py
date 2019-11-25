@@ -10,8 +10,8 @@ rmPosPin = 16
 rmGndPin = 23
 
 # Axle motor +ve, gnd
-amPosPin = ##
-amGndPin = ##
+amPosPin = 0
+amGndPin = 0
 
 #########################################
 
@@ -54,8 +54,8 @@ def move_back_left():
     move_backward()
 
 def center_axle():
-    GPIO.out(amPosPin,GPIO.LOW)
-    GPIO.out(amGndPin,GPIO.LOW)
+    GPIO.output(amPosPin,GPIO.LOW)
+    GPIO.output(amGndPin,GPIO.LOW)
 
 def stop():
     GPIO.output(lmPosPin, GPIO.LOW)
