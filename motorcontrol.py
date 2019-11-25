@@ -9,6 +9,10 @@ lmGndPin = 24
 rmPosPin = 16
 rmGndPin = 23
 
+# Axle motor +ve, gnd
+amPosPin = ##
+amGndPin = ##
+
 #########################################
 
 def move_forward():
@@ -25,13 +29,33 @@ def move_backward():
     GPIO.output(rmPosPin,GPIO.LOW)
     GPIO.output(rmGndPin,GPIO.HIGH)
 
-def turn_right():
-    GPIO.output(lmPosPin,GPIO.HIGH)
-    GPIO.output(lmGndPin,GPIO.LOW)
+def turn_axle_right():
+    GPIO.output(amPosPin,GPIO.HIGH)
+    GPIO.output(amGndPin,GPIO.LOW)
 
-def turn_left():
-    GPIO.output(rmPosPin,GPIO.HIGH)
-    GPIO.output(rmGndPin,GPIO.LOW)
+def turn_axle_left():
+    GPIO.output(amPosPin,GPIO.LOW)
+    GPIO.output(amGndPin,GPIO.HIGH)
+
+def move_right():
+    turn_axle_right()
+    move_forward()
+
+def move_left():
+    turn_axle_left()
+    move_forward()
+
+def move_back_right():
+    turn_axle_right()
+    move_backward()
+
+def move_back_left():
+    turn_axle_left()
+    move_backward()
+
+def center_axle():
+    GPIO.out(amPosPin,GPIO.LOW)
+    GPIO.out(amGndPin,GPIO.LOW)
 
 def stop():
     GPIO.output(lmPosPin, GPIO.LOW)
@@ -39,6 +63,8 @@ def stop():
 
     GPIO.output(rmPosPin, GPIO.LOW)
     GPIO.output(rmGndPin, GPIO.LOW)
+
+    center_axle()
 
 def __setup():
     # Set the GPIO mode
@@ -50,6 +76,9 @@ def __setup():
 
     GPIO.setup(rmPosPin,GPIO.OUT)
     GPIO.setup(rmGndPin,GPIO.OUT)
+
+    GPIO.setup(amPosPin,GPIO.OUT)
+    GPIO.setup(amGndPin,GPIO.OUT)
 
     GPIO.cleanup()
     
