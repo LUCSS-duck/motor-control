@@ -3,15 +3,11 @@ from RPi import GPIO
 # Define GPIO pins
 # Left motor +ve, gnd
 lmPosPin = 27
-lmPos = False
 lmGndPin = 24
-lmGnd = False
 
 # Right motor +ve, gnd
 rmPosPin = 16
-rmPos = False
 rmGndPin = 23
-rmGnd = False
 
 #########################################
 
